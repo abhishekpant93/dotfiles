@@ -67,6 +67,9 @@
 
 (add-hook 'after-init-hook 'global-company-mode)
 
+(require 'helm-config)
+(helm-mode 1)
+
 ;;------------
 ;;;C/C++
 ;;------------
@@ -139,6 +142,27 @@
 (defun my-python-mode-hook ()
   (add-to-list 'company-backends 'company-jedi))
 (add-hook 'python-mode-hook 'my-python-mode-hook)
+
+;;------------
+;;;Web
+;;------------
+
+(add-hook 'js-mode-hook 'js2-minor-mode)
+
+(require 'company-web-html)
+			  
+(eval-after-load 'js2-mode
+  '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
+
+(eval-after-load 'json-mode
+  '(define-key json-mode-map (kbd "C-c b") 'web-beautify-js))
+
+(eval-after-load 'sgml-mode
+  '(define-key html-mode-map (kbd "C-c b") 'web-beautify-html))
+
+(eval-after-load 'css-mode
+  '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
+
 
 (provide '.emacs)
 ;;; .emacs ends here
